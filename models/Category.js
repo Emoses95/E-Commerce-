@@ -1,4 +1,3 @@
-const { INTEGER } = require('sequelize');
 const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
@@ -12,10 +11,16 @@ Category.init(
       allowNull: false,
       primaryKey:true,
       autoIncrement:true,
+      validate:{
+        isNumeric:true
+      }
     },
     category_name:{
       type: DataTypes.STRING,
       allowNull:false,
+      validate:{
+        isAlphanumeric:true
+      }
     }
     // define columns
   },
