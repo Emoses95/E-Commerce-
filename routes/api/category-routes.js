@@ -3,11 +3,11 @@ const { Category, Product } = require('../../models');
 
 
 
+// find all categories
 router.get('/', (req, res) => {
-  // find all categories
-  // be sure to include its associated Products
   Category.findAll({
     include: {
+      //  associated Products
       model: Product,
       include: [Category]
     }
@@ -16,14 +16,14 @@ router.get('/', (req, res) => {
   }).catch(err => {
     console.log(err);
     res.status(500).json({
-      msg: "an error occured, sorry about that",
+      msg: "an error occured",
       err: err
     })
   })
 });
 
+// find one category by its `id` value
 router.get('/:id', (req, res) => {
-  // find one category by its `id` value
   // be sure to include its associated Products
   Category.findByPk(req.params.id, {
     include: {
@@ -35,20 +35,20 @@ router.get('/:id', (req, res) => {
       return res.json((categoryData));
     } else {
       res.status(404).json({
-        msg: "no record found"
+        msg: "no Prodcut"
       })
     }
   }).catch(err => {
     console.log(err);
     res.status(500).json({
-      msg: "an error occured, sorry about that",
+      msg: "an error occured",
       err: err
     })
   })
 });
 
+// create a new category
 router.post('/', (req, res) => {
-  // create a new category
   Category.create({
     categoryName: req.body.categoryName,
     categoryId: req.body.categoryId
@@ -61,14 +61,14 @@ router.post('/', (req, res) => {
   }).catch(err => {
     console.log(err);
     res.status(500).json({
-      msg: "an error occured, sorry about that",
+      msg: "an error occured",
       err: err
     })
   })
 });
 
+// update a category by its `id` value
 router.put('/:id', (req, res) => {
-  // update a category by its `id` value
   Category.update({
     categoryName: req.body.categoryName,
     categoryId: req.body.categoryId
@@ -85,28 +85,28 @@ router.put('/:id', (req, res) => {
   }).catch(err => {
     console.log(err);
     res.status(500).json({
-      msg: "an error occured, sorry about that",
+      msg: "an error occured",
       err: err
     })
   })
 });
 
+// delete a category by its `id` value
 router.delete('/:id', (req, res) => {
-  // delete a category by its `id` value
   Category.destroy({
     where: {
       id: req.params.id
     }
   }).then((categoryData) => {
     if ((categoryData)) {
-      return res.json(data)
+      return res.json(categoryData)
     } else {
       return res.status(404).json({ msg: "no such record" })
     }
   }).catch(err => {
     console.log(err);
     res.status(500).json({
-      msg: "an error occured, sorry about that",
+      msg: "an error occured",
       err: err
     })
   })

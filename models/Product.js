@@ -16,9 +16,7 @@ Product.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
-      // validate:{
-      //   isNumeric:true
-      // }
+
     },
     product_name: {
       type: DataTypes.STRING,

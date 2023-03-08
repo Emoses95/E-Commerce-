@@ -6,8 +6,8 @@ const { Product, Category, Tag, ProductTag } = require('../models');
 router.get('/', (req, res) => {
     Product.findAll({
         include: [Category, Tag]
-    }).then(data => {
-        res.json(data)
+    }).then(p => {
+        res.json(p)
     })
 });
 
@@ -17,8 +17,8 @@ router.get('/:id', (req, res) => {
         where: {
             id: req.params.id
         }, include: [Category, Tag]
-    }).then(data => {
-        res.json(data)
+    }).then(p => {
+        res.json(p)
     })
 });
 
@@ -83,7 +83,7 @@ router.delete('/:id', (req, res) => {
         where: {
             id: req.params.id
         }
-    }).then(data => {
+    }).then(p => {
         res.json('product has been deleted')
     })
 });

@@ -12,9 +12,7 @@ Tag.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
-      // validate:{
-      //   isNumeric:true
-      // }
+
     },
     tag_name: {
       type: DataTypes.STRING,
