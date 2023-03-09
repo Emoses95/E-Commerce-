@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product, Category, Tag, ProductTag } = require('../models');
+const { Product, Category, Tag, ProductTag } = require('../../models');
 
 
 // Get all 
@@ -7,7 +7,8 @@ router.get('/', (req, res) => {
     Product.findAll({
         include: [Category, Tag]
     }).then(p => {
-        res.json(p)
+        // res.json(p)
+        res.json({ hello: "world" })
     })
 });
 

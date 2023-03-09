@@ -8,8 +8,7 @@ router.get('/', (req, res) => {
   Category.findAll({
     include: {
       //  associated Products
-      model: Product,
-      include: [Category]
+      model: Product
     }
   }).then((categoryData) => {
     res.json(categoryData)
@@ -27,8 +26,8 @@ router.get('/:id', (req, res) => {
   // be sure to include its associated Products
   Category.findByPk(req.params.id, {
     include: {
-      model: Product,
-      include: [Category]
+      model: Category,
+      include: [Product]
     }
   }).then((categoryData) => {
     if ((categoryData)) {
@@ -48,6 +47,26 @@ router.get('/:id', (req, res) => {
 });
 
 // create a new category
+// router.post('/', (req, res) => {
+//   Category.create(req.body)
+//       .then((category) => {
+//           return Category.findOneAndUPdate(
+//               { id: req.body.id },
+//               { category_name: req.body.category_name },
+//               { $addToSet: { categorys: category_name } },
+//               { new: true }
+//           );
+//       })
+//       .then((category) =>
+//           !category
+//               ? res.status(200).json(`${category_name} has been created`)
+//               : res.json('Created the Category')
+//       )
+//       .catch((err) => {
+//           console.log(err);
+//           res.status(500).json(err);
+//       });
+// });
 router.post('/', (req, res) => {
   Category.create({
     categoryName: req.body.categoryName,
