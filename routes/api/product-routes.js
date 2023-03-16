@@ -2,26 +2,56 @@ const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
 
-// Get all 
+// Get all product routes 
 router.get('/', (req, res) => {
     Product.findAll({
-        include: [Category, Tag]
-    }).then(p => {
-        // res.json(p)
-        res.json({ hello: "world" })
+        include: {
+            model: Category, Tag
+        }
+    }).then(productData => {
+        res.json(productData)
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            msg: 'an error occured',
+            err: err
+        })
     })
 });
 
-// Get one product by it id
+
+// Get one product by its id
 router.get('/:id', (req, res) => {
-    Product.findOne({
-        where: {
-            id: req.params.id
-        }, include: [Category, Tag]
-    }).then(p => {
-        res.json(p)
+    Product.findByPk(req.params.id, {
+        include: [
+            {
+                model: Category,
+                through: ProductTag
+            },
+            {
+                model: Tag,
+                through: ProductTag
+            }
+        ]
     })
+        .then(productData => {
+            if (productData) {
+                res.json(productData);
+            } else {
+                res.status(404).json({
+                    msg: "No product found with the provided ID"
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                msg: "An error occurred while retrieving the product data",
+                err: err
+            });
+        });
 });
+
 
 // Post to create product
 router.post('/', (req, res) => {
@@ -84,7 +114,7 @@ router.delete('/:id', (req, res) => {
         where: {
             id: req.params.id
         }
-    }).then(p => {
+    }).then(productData => {
         res.json('product has been deleted')
     })
 });

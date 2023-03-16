@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const { Tag, Product, ProductTag, } = require('../../models');
 
-// The `/api/tags` endpoint
 
-// find all tags
+
+// Get all tag routes 
 router.get('/', (req, res) => {
   Tag.findAll({
     include: {

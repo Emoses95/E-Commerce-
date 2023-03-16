@@ -22,7 +22,7 @@ THEN a server is started and the Sequelize models are synced to the MySQL databa
 WHEN a user opens API GET routes in Insomnia for categories, products, or tags
 THEN the data for each of these routes is displayed in a formatted JSON
 WHEN a user test API POST, PUT, and DELETE routes in Insomnia
-THEN a user able to successfully create, update, and delete data in my database
+THEN a user able to successfully create, update, and delete data in my database Please make sure to add a ".env" file before running the application.
 
 ## Link to Walkthrough Video
 
