@@ -27,3 +27,7 @@ THEN a user able to successfully create, update, and delete data in my database 
 ## Link to Walkthrough Video
 
 https://drive.google.com/file/d/19en2zhue6NHMSpXqeWpJ-nLA2m0WPQeV/view
+
+Second walkthrough video
+
+https://drive.google.com/file/d/1Q3OFSCvfhynD-g5joBsAfFyT_tPCu0o_/view
